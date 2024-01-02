@@ -5,7 +5,6 @@ return {
 			tranaparent = true,
 			style = 'cool',
 		}
-
 		require('onedark').load()
 	end
 }

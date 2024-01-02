@@ -8,7 +8,7 @@ return {
 			highlight = {
 				enable = true
 			}
-		}	
+        }
 	end,
 	build = ':TSUpdate',
 }
