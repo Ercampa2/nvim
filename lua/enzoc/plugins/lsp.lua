@@ -1,74 +1,80 @@
 return {
-	'VonHeikemen/lsp-zero.nvim',
-	branch = 'v3.x',
+	'neovim/nvim-lspconfig',
+	branch = 'master',
 	dependencies = {
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
-		'neovim/nvim-lspconfig',
 		'hrsh7th/cmp-nvim-lsp',
 		'hrsh7th/nvim-cmp',
-		'hrsh7th/cmp-buffer',
-		'rafamadriz/friendly-snippets',
-		'L3MON4D3/LuaSnip',
+		'hrsh7th/cmp-path',
+		'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-buffer',
+        'j-hui/fidget.nvim',
 	},
 	config = function()
-		--LSP
-		local lsp_zero = require 'lsp-zero'
-		lsp_zero.on_attach(function(_, bufnr)
-			local opts = {buffer = bufnr, remap = false}
+		-- LSP
+		local cmp = require 'cmp'
+        local cmp_lsp = require 'cmp_nvim_lsp'
+		local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
-			vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-			vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-			vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
-			vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
-			vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
-			vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
-			vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
-			vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
-			vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
-			vim.keymap.set('n', '<leader>h', function() vim.lsp.buf.signature_help() end, opts)
-		end)
+        local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 
+        local capabilities = vim.tbl_deep_extend(
+        'force',
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        cmp_lsp.default_capabilities()
+        )
+
+        require 'fidget'.setup{}
 		require 'mason'.setup{}
 		require 'mason-lspconfig'.setup{
+            ensure_installed = {
+                'emmet_language_server',
+                'cssls',
+                'eslint',
+                'html',
+                'jsonls',
+                'intelephense',
+                'tsserver',
+                'lua_ls',
+            },
 			handlers = {
-				lsp_zero.default_setup,
-				lua_ls = function()
-					local lua_opts = lsp_zero.nvim_lua_ls()
-					require 'lspconfig'.lua_ls.setup(lua_opts)
-				end,
+               function (server_name) -- default handler (optional)
 
+                   require("lspconfig")[server_name].setup {
+                       capabilities = capabilities
+                   }
+               end,
+               ['lua_ls'] = function ()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.lua_ls.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            Lua = {
+                                diagnostics = {
+                                    globals = { 'vim' }
+                                }
+                            }
+                        }
+                    }
+               end
 			}
 		}
 
-		-- LANGUAGE SERVERS
-		require 'lspconfig'.emmet_language_server.setup{}
-		require 'lspconfig'.cssls.setup{}
-		require 'lspconfig'.eslint.setup{}
-		require 'lspconfig'.html.setup{}
-		require 'lspconfig'.jsonls.setup{}
-		require 'lspconfig'.intelephense.setup{}
-		require 'lspconfig'.tsserver.setup{}
-		--require 'lspconfig'.php_cs.setup{}
-		--require 'lspconfig'.php_cs_fixer.setup{}
-		--require 'lspconfig'.jsonlint.setup{}
-		--require 'lspconfig'.lua_language_server.setup{}
-
-		-- CMP
-		local cmp = require 'cmp'
-		local cmp_select = {behavior = cmp.SelectBehavior.Select}
-
-		require 'luasnip.loaders.from_vscode'.load({})
-
+        -- Autocomplete
 		cmp.setup({
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body)
+                end
+            },
 			sources = {
 				{name = 'path'},
 				{name = 'luasnip'},
 				{name = 'nvim_lsp'},
-				{name = 'nvim_lua'},
 				{name = 'buffer'},
 			},
-			formatting = lsp_zero.cmp_format(),
 			mapping = cmp.mapping.preset.insert{
 				['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
 				['<C-b>'] = cmp.mapping.select_next_item(cmp_select),
@@ -85,7 +91,17 @@ return {
 			},
 		})
 
-
+        vim.diagnostic.config({
+            virtual_text = true,
+            update_in_insert = true,
+            float = {
+                focusable = false,
+                style = "minimal",
+                border = 'rounded',
+                header = '',
+                prefix = '',
+            }
+        })
 	end,
 
 }
