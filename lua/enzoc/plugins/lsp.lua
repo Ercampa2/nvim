@@ -37,11 +37,11 @@ return {
                 'jsonls',
                 'intelephense',
                 'tsserver',
-                'lua_ls',
+                'python',
+                --'lua_ls',
             },
 			handlers = {
-               function (server_name) -- default handler (optional)
-
+               function (server_name)
                    require("lspconfig")[server_name].setup {
                        capabilities = capabilities
                    }
@@ -102,6 +102,9 @@ return {
                 prefix = '',
             }
         })
+
+        --Java
+        require('lspconfig').jdtls.setup({})
 	end,
 
 }

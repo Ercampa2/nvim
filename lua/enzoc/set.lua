@@ -12,7 +12,7 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = "C:\\Users\\enzoc\\AppData\\Local\\nvim\\undodir"
+vim.opt.undodir = "undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
@@ -26,6 +26,6 @@ vim.opt.isfname:append('@-@')
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = '100'
+vim.opt.foldmethod = "marker"
 
 vim.g.mapleader = " "
