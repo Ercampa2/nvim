@@ -29,3 +29,4 @@ vim.opt.updatetime = 50
 vim.opt.foldmethod = "marker"
 
 vim.g.mapleader = " "
+vim.opt.clipboard = 'unnamedplus'
