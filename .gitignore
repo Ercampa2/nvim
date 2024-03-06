@@ -1,1 +1,3 @@
-undodir/
+undodir/*
+custom_snippets/
+teste.*
