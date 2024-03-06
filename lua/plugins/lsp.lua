@@ -38,7 +38,8 @@ return {
                 'intelephense',
                 'tsserver',
                 'pyright',
-                --'lua_ls',
+                'bashls',
+                'lua_ls',
             },
 			handlers = {
                function (server_name)
@@ -104,7 +105,7 @@ return {
         })
 
         --Java
-        require('lspconfig').jdtls.setup({})
+        -- require('lspconfig').jdtls.setup({})
 	end,
 
 }

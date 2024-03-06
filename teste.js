@@ -1,8 +1,1 @@
-
-/**
- * @param {number} param 
- * @returns {} 
- */
-function name(param) {
-   return 
-}
+let a = 3;
