@@ -6,7 +6,7 @@ return {
 			ensure_installed = { 'javascript', 'php', 'sql', 'c', 'lua', 'jsdoc', 'python', 'cpp'},
 			auto_install = true,
 			highlight = {
-				enable = true
+				-- enable = true
 			}
         }
 	end,
