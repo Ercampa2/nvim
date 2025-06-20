@@ -1,0 +1,89 @@
+return {}
+-- return {
+--     'L3MON4D3/LuaSnip',
+--     version='v2.2.0',
+--     dependencies = {
+--         'saadparwaiz1/cmp_luasnip',
+--     },
+--     config = function ()
+--
+--         local ls = require "luasnip"
+--         local s = ls.snippet
+--         local t = ls.text_node
+--         local i = ls.insert_node
+--
+--
+--         ls.add_snippets('php', {
+--             -- Query
+--             s('query', {
+--                 t({
+--                     "$result = stmt_query([",
+--                     "\t\"link\"  => ,",
+--                     "\t\"sql\"   => ,",
+--                     "\t\"types\" => ,",
+--                     "\t\"vars\"  => [",
+--                     "\t],",
+--                     "])->get_result();"
+--                 }),
+--             }),
+--             s("config", {
+--                 t({
+--                     "$config = [",
+--                     "\t\"arq_validador\" => \"login\",",
+--                     "\t\"nome_pg\" => \"\",",
+--                     "\t\"links\" => [ ",
+--                     "\t\t\"sel\" => [",
+--                     "\t\t],",
+--                     "\t\t\"rec\" => [",
+--                     "\t\t],",
+--                     "\t],",
+--                     "\t\"funcoes\" => [ ",
+--                     "\t],",
+--                     "];",
+--                 })
+--             })
+--         })
+--         ls.add_snippets("javascript", {
+--             -- Simple ajax
+--             s("ajax", {
+--                 t({
+--                     "$.ajax({",
+--                     "\turl: controllerUrl,",
+--                     "\tdataType: 'json',",
+--                     "\tmethod: 'POST',"
+--                 }),
+--                 t({
+--                     "",
+--                     "\tdata: {",
+--                     "\t\tcontroller: "}),
+--                 i(1),
+--                 t({
+--                     "",
+--                     "\t}",
+--                     "})",
+--                 })
+--             }),
+--
+--             -- Ajax for FormData
+--             s("ajaxForm", {
+--                 t({
+--                     "$.ajax({",
+--                     "\turl: controllerUrl,",
+--                     "\tdataType: 'json',",
+--                     "\tmethod: 'POST',",
+--                     "\tprocessData: false,",
+--                     "\tcontentType: false,",
+--                 }),
+--                 t({
+--                     "",
+--                     "\tdata",
+--                     "})",
+--                     ".done(res => {",
+--                     "})",
+--                     ".fail(HooxUtils.handlerFalhaAjax);",
+--                 })
+--             })
+--         })
+--     end
+-- }
+
