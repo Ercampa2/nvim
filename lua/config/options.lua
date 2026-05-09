@@ -1,3 +1,4 @@
+
 -- Line number
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -13,7 +14,7 @@ vim.opt.smartindent = true
 
 -- Undo
 vim.opt.undofile = true
-vim.opt.undodir = "C:\\Users\\gavea\\AppData\\Local\\nvim\\undodir"
+vim.opt.undodir = "undodir"
 
 -- Search
 vim.opt.smartcase = true
@@ -68,12 +69,3 @@ vim.diagnostic.config({
         end
     }
 })
-
-
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
---
--- vim.lsp.config('cssls', { capabilities = capabilities })
--- vim.lsp.enable('cssls')
--- vim.lsp.enable('intelephense')
--- vim.lsp.enable('emmet_language_server')

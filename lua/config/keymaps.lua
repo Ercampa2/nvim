@@ -10,7 +10,7 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv') -- centraliza ao passar ao proximo resultado da busca
 vim.keymap.set('n', 'N', 'Nzzzv')
 
-vim.keymap.set('n','<leader>p', "\"_dP") -- ao colar sobre algo, n„o substitui (N„o funciona)
+vim.keymap.set('n','<leader>p', "\"_dP") -- ao colar sobre algo, n√£o substitui (N√£o funciona)
 
 vim.keymap.set('n', "<leader>y", "\"+y") -- Copia para o clipoard do OS
 vim.keymap.set('v', "<leader>y", "\"+y")
